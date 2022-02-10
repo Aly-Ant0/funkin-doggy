@@ -368,16 +368,6 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-		  
-			case 'swagmountain': //Week Horns
-				var bg:BGSprite = new BGSprite('swagmountain/back', 0, 0, 0.9, 0.9);
-				bg.screenCenter(XY);
-				add(bg);
-
-				var fg:BGSprite = new BGSprite('swagmountain/front', 0, 0, 0.9, 0.9);
-				fg.screenCenter(XY);
-				add(fg);
-				
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
 					halloweenBG = new BGSprite('halloween_bg', -200, -100, ['halloweem bg0', 'halloweem bg lightning strike']);
@@ -395,6 +385,17 @@ class PlayState extends MusicBeatState
 				CoolUtil.precacheSound('thunder_1');
 				CoolUtil.precacheSound('thunder_2');
 
+			case 'swagmountain': //Week Horns
+				var bg:BGSprite = new BGSprite('swagmountain/back', 0, 0, 0.9, 0.9);
+				bg.screenCenter(XY);
+				bg.updateHitbox();
+				add(bg);
+
+				var fg:BGSprite = new BGSprite('swagmountain/front', 0, 0, 0.9, 0.9);
+				fg.screenCenter(XY);
+				bg.updateHitbox();
+				add(fg);
+				
 			case 'philly': //Week 3
 				if(!ClientPrefs.lowQuality) {
 					var bg:BGSprite = new BGSprite('philly/sky', -100, 0, 0.1, 0.1);
