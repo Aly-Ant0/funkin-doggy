@@ -368,6 +368,17 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+		  
+			case 'swagmountain': //Week Horns
+				var bg:BGSprite = new BGSprite('swagmountain/back', 0, 0, 0.9, 0.9);
+				bg.screenCenter(XY);
+				add(bg);
+
+				var fg:BGSprite = new BGSprite('swagmountain/front', 0, 0, 0.9, 0.9);
+				fg.screenCenter(XY);
+				add(fg);
+				}
+				
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
@@ -2056,15 +2067,23 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else
-			iconP1.animation.curAnim.curFrame = 0;
+// Player 1
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
+		if (healthBar.percent < 20)
+
+		 iconP1.animation.curAnim.curFrame = 1;
+		else if (healthBar.percent > 85)
+ 			iconP1.animation.curAnim.curFrame = 2;
 		else
-			iconP2.animation.curAnim.curFrame = 0;
+ 			iconP1.animation.curAnim.curFrame = 0;
+
+// Player 2
+		if (healthBar.percent > 85)
+ 			iconP2.animation.curAnim.curFrame = 1;
+		else if (healthBar.percent < 20)
+			iconP2.animation.curAnim.curFrame = 2;
+		else
+ 			iconP2.animation.curAnim.curFrame = 0;
 
 		if (FlxG.keys.justPressed.EIGHT && !endingSong && !inCutscene) {
 			persistentUpdate = false;
