@@ -323,8 +323,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'spookeez' | 'south' | 'monster':
 					curStage = 'spooky';
-				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
-					curStage = 'philly';
+				case 'lil-goat' | 'hamster-song':
+					curStage = 'swagmountain';
 				case 'milf' | 'satin-panties' | 'high':
 					curStage = 'limo';
 				case 'cocoa' | 'eggnog':
