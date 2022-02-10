@@ -343,7 +343,7 @@ class PlayState extends MusicBeatState
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
-				directory: "",
+				directory: "", no
 				defaultZoom: 0.9,
 				isPixelStage: false,
 			
@@ -377,7 +377,6 @@ class PlayState extends MusicBeatState
 				var fg:BGSprite = new BGSprite('swagmountain/front', 0, 0, 0.9, 0.9);
 				fg.screenCenter(XY);
 				add(fg);
-				}
 				
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
