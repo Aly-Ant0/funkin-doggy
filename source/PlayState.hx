@@ -393,7 +393,7 @@ class PlayState extends MusicBeatState
 
 				var fg:BGSprite = new BGSprite('swagmountain/front', 0, 0, 0.9, 0.9);
 				fg.screenCenter(XY);
-				bg.updateHitbox();
+				fg.updateHitbox();
 				add(fg);
 				
 			case 'philly': //Week 3
