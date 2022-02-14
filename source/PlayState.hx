@@ -349,7 +349,7 @@ class PlayState extends MusicBeatState
 			
 				boyfriend = [770, 100],
 				girlfriend = [400, 130],
-				opponent = [100, 100],
+				opponent = [100, 100];
 			};
 		}
 
