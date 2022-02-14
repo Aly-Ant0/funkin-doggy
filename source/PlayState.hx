@@ -323,8 +323,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'spookeez' | 'south' | 'monster':
 					curStage = 'spooky';
-				case 'lil-goat' | 'hamster-song':
-					curStage = 'swagmountain';
+				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
+					curStage = 'philly';
 				case 'milf' | 'satin-panties' | 'high':
 					curStage = 'limo';
 				case 'cocoa' | 'eggnog':
@@ -349,7 +349,7 @@ class PlayState extends MusicBeatState
 			
 				boyfriend = [770, 100],
 				girlfriend = [400, 130],
-				opponent = [100, 100]
+				opponent = [100, 100],
 			};
 		}
 
@@ -368,6 +368,32 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'stage': //Week 1
+				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
+				add(bg);
+
+				var stageFront:BGSprite = new BGSprite('stagefront', -650, 600, 0.9, 0.9);
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+				stageFront.updateHitbox();
+				add(stageFront);
+
+				if(!ClientPrefs.lowQuality) {
+					var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
+					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+					stageLight.updateHitbox();
+					add(stageLight);
+					var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
+					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+					stageLight.updateHitbox();
+					stageLight.flipX = true;
+					add(stageLight);
+
+					var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
+					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+					stageCurtains.updateHitbox();
+					add(stageCurtains);
+				}
+
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
 					halloweenBG = new BGSprite('halloween_bg', -200, -100, ['halloweem bg0', 'halloweem bg lightning strike']);
@@ -385,17 +411,6 @@ class PlayState extends MusicBeatState
 				CoolUtil.precacheSound('thunder_1');
 				CoolUtil.precacheSound('thunder_2');
 
-			case 'swagmountain': //Week Horns
-				var bg:BGSprite = new BGSprite('swagmountain/back', 0, 0, 0.9, 0.9);
-				bg.screenCenter(XY);
-				bg.updateHitbox();
-				add(bg);
-
-				var fg:BGSprite = new BGSprite('swagmountain/front', 0, 0, 0.9, 0.9);
-				fg.screenCenter(XY);
-				fg.updateHitbox();
-				add(fg);
-				
 			case 'philly': //Week 3
 				if(!ClientPrefs.lowQuality) {
 					var bg:BGSprite = new BGSprite('philly/sky', -100, 0, 0.1, 0.1);
@@ -1113,25 +1128,19 @@ class PlayState extends MusicBeatState
 
 		if(foundFile) 
 		{
-			if (!runCutscene)
-		    {
-	            FlxG.switchState(new VideoState('assets/videos/' + fileName + '.webm', function()
-	            {
-	                FlxG.switchState(new PlayState());  
-	                runCutscene = true;                          
-	            }));
-		    }
-		    else
-		    {
-				if(endingSong) 
-				{
-					endSong();
-				} 
-				else 
-				{
-					startCountdown();
-				}
-		    }
+            var video = new WebmPlayerS(fileName, true);
+            video.endcallback = () -> {
+                remove(video);
+                if(endingSong) {
+                    endSong();
+                } else {
+                    startCountdown();
+                }
+            }
+            video.setGraphicSize(FlxG.width);
+            video.updateHitbox();
+            add(video);
+            video.play();
 		} 
 		else 
 		{
@@ -2041,23 +2050,15 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-// Player 1
-
 		if (healthBar.percent < 20)
-
-		 iconP1.animation.curAnim.curFrame = 1;
-		else if (healthBar.percent > 85)
- 			iconP1.animation.curAnim.curFrame = 2;
+			iconP1.animation.curAnim.curFrame = 1;
 		else
- 			iconP1.animation.curAnim.curFrame = 0;
+			iconP1.animation.curAnim.curFrame = 0;
 
-// Player 2
-		if (healthBar.percent > 85)
- 			iconP2.animation.curAnim.curFrame = 1;
-		else if (healthBar.percent < 20)
-			iconP2.animation.curAnim.curFrame = 2;
+		if (healthBar.percent > 80)
+			iconP2.animation.curAnim.curFrame = 1;
 		else
- 			iconP2.animation.curAnim.curFrame = 0;
+			iconP2.animation.curAnim.curFrame = 0;
 
 		if (FlxG.keys.justPressed.EIGHT && !endingSong && !inCutscene) {
 			persistentUpdate = false;
