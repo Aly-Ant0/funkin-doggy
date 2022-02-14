@@ -344,7 +344,7 @@ class PlayState extends MusicBeatState
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
 				directory: "", no
-				defaultZoom: 0.9,
+				defaultZoom = 0.9,
 				isPixelStage: false,
 			
 				boyfriend: [770, 100],
